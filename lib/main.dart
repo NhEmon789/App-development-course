@@ -38,6 +38,21 @@ class HomeActivity extends StatelessWidget {
           "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
       "title": "Nakib",
     },
+    {
+      "img":
+          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+      "title": "Emon",
+    },
+    {
+      "img":
+          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+      "title": "Hasan",
+    },
+    {
+      "img":
+          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+      "title": "Nakib",
+    },
   ];
 
   MySnackBar(message, context) {
@@ -123,7 +138,12 @@ class HomeActivity extends StatelessWidget {
         ],
       ),
 
-      body: ListView.builder(
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 1.0,
+          childAspectRatio: 1.2,
+        ),
         itemCount: MyItems.length,
         itemBuilder: (context, index) {
           return GestureDetector(
