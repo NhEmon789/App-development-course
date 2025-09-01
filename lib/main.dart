@@ -64,12 +64,12 @@ class HomeActivity extends StatelessWidget {
       body: Center(child: Text("data")),
       floatingActionButton: FloatingActionButton(
         elevation: 10,
-        child: Icon(Icons.home),
         backgroundColor: Colors.tealAccent,
         foregroundColor: Colors.white,
         onPressed: () {
           MySnackBar("button", context);
         },
+        child: Icon(Icons.home),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
@@ -91,6 +91,45 @@ class HomeActivity extends StatelessWidget {
             MySnackBar("profile", context);
           }
         },
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              padding: EdgeInsets.all(0),
+
+              child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(color: Colors.white),
+                accountName: Text(
+                  "Flutter",
+                  style: TextStyle(color: Colors.black),
+                ),
+                accountEmail: Text(
+                  "flutter@example.com",
+                  style: TextStyle(color: Colors.black),
+                ),
+                currentAccountPicture: Image.network(
+                  "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+                ),
+                onDetailsPressed: () {},
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.add_a_photo),
+              title: Text("Add to photos"),
+              onTap: () {
+                MySnackBar("button", context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.alarm),
+              title: Text("Alarm"),
+              onTap: () {
+                MySnackBar("button", context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
