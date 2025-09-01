@@ -62,6 +62,36 @@ class HomeActivity extends StatelessWidget {
         ],
       ),
       body: Center(child: Text("data")),
+      floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        child: Icon(Icons.home),
+        backgroundColor: Colors.tealAccent,
+        foregroundColor: Colors.white,
+        onPressed: () {
+          MySnackBar("button", context);
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Colors.tealAccent,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "profile"),
+        ],
+        onTap: (int index) {
+          if (index == 0) {
+            MySnackBar("home", context);
+          }
+          if (index == 1) {
+            MySnackBar("search", context);
+          }
+          if (index == 2) {
+            MySnackBar("profile", context);
+          }
+        },
+      ),
     );
   }
 }
