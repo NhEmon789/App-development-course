@@ -27,8 +27,18 @@ class HomeActivity extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("AppBar"),
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.lightBlueAccent,
+        centerTitle: true,
+        titleSpacing: 0,
+        toolbarHeight: 60,
+        toolbarOpacity: 1,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 64, 255, 188),
+        elevation: 10.0,
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.comment)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+        ],
       ),
       body: Center(child: Text("data")),
     );
