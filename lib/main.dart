@@ -105,14 +105,48 @@ class HomeActivity extends StatelessWidget {
         ],
       ),
 
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            MyAlertDialog(context);
-          },
-          child: Text("Elevated button"),
-          style: buttonStyle,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Name",
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Full Name",
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Email",
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(0),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text("Submit"),
+              style: buttonStyle,
+            ),
+          ),
+        ],
       ),
 
       floatingActionButton: FloatingActionButton(
