@@ -61,21 +61,34 @@ class HomeActivity extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        height: 250,
-        width: 250,
-        alignment: Alignment.center,
-        margin: EdgeInsets.all(30),
-        decoration: BoxDecoration(
-          color: Colors.lightBlueAccent,
-          border: Border.all(color: Colors.black, width: 6),
-        ),
-        child: Image.network(
-          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
-          height: 220,
-          width: 220,
-        ),
+
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.network(
+              "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+            ),
+          ),
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.network(
+              "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+            ),
+          ),
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.network(
+              "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+            ),
+          ),
+        ],
       ),
+
       floatingActionButton: FloatingActionButton(
         elevation: 10,
         backgroundColor: Colors.tealAccent,
