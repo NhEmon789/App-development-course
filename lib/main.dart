@@ -14,13 +14,31 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(primarySwatch: Colors.indigo),
       color: Colors.amber,
       debugShowCheckedModeBanner: false,
-      home: const HomeActivity(),
+      home: HomeActivity(),
     );
   }
 }
 
 class HomeActivity extends StatelessWidget {
-  const HomeActivity({super.key});
+  HomeActivity({super.key});
+
+  var MyItems = [
+    {
+      "img":
+          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+      "title": "Emon",
+    },
+    {
+      "img":
+          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+      "title": "Hasan",
+    },
+    {
+      "img":
+          "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
+      "title": "Nakib",
+    },
+  ];
 
   MySnackBar(message, context) {
     return ScaffoldMessenger.of(
@@ -105,48 +123,21 @@ class HomeActivity extends StatelessWidget {
         ],
       ),
 
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Name",
-              ),
+      body: ListView.builder(
+        itemCount: MyItems.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              MySnackBar(MyItems[index]['title'], context);
+            },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              width: double.infinity,
+              height: 200,
+              child: Image.network(MyItems[index]["img"]!, fit: BoxFit.fill),
             ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Full Name",
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Email",
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.all(0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text("Submit"),
-              style: buttonStyle,
-            ),
-          ),
-        ],
+          );
+        },
       ),
 
       floatingActionButton: FloatingActionButton(
