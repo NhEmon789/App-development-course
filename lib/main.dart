@@ -30,6 +30,15 @@ class HomeActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+      padding: EdgeInsets.all(25),
+      backgroundColor: Colors.blue,
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("AppBar"),
@@ -65,26 +74,24 @@ class HomeActivity extends StatelessWidget {
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.network(
-              "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
-            ),
+          TextButton(
+            onPressed: () {
+              MySnackBar("TextButton", context);
+            },
+            child: Text("text button"),
           ),
-          SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.network(
-              "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
-            ),
+          ElevatedButton(
+            onPressed: () {
+              MySnackBar("ElevatedButton", context);
+            },
+            child: Text("Elevated button"),
+            style: buttonStyle,
           ),
-          SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.network(
-              "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
-            ),
+          OutlinedButton(
+            onPressed: () {
+              MySnackBar("OutlineButton", context);
+            },
+            child: Text("Outline Button"),
           ),
         ],
       ),
