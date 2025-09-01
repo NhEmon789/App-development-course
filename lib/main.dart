@@ -28,6 +28,40 @@ class HomeActivity extends StatelessWidget {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
+  MyAlertDialog(context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Expanded(
+          child: AlertDialog(
+            title: Text("alert!"),
+            content: Text("Do you want to delete"),
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+
+            actions: [
+              TextButton(
+                onPressed: () {
+                  MySnackBar("Delete success", context);
+                  Navigator.of(context).pop();
+                },
+                child: Text("yes"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("no"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
@@ -71,29 +105,14 @@ class HomeActivity extends StatelessWidget {
         ],
       ),
 
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          TextButton(
-            onPressed: () {
-              MySnackBar("TextButton", context);
-            },
-            child: Text("text button"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              MySnackBar("ElevatedButton", context);
-            },
-            child: Text("Elevated button"),
-            style: buttonStyle,
-          ),
-          OutlinedButton(
-            onPressed: () {
-              MySnackBar("OutlineButton", context);
-            },
-            child: Text("Outline Button"),
-          ),
-        ],
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            MyAlertDialog(context);
+          },
+          child: Text("Elevated button"),
+          style: buttonStyle,
+        ),
       ),
 
       floatingActionButton: FloatingActionButton(
