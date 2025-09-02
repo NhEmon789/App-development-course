@@ -105,79 +105,22 @@ class HomeActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Home")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => activity1()),
-              );
-            },
-            child: Text("go to activity1"),
+      body: Center(
+        child: Card(
+          elevation: 10,
+          color: Colors.blue,
+
+          child: SizedBox(
+            height: 200,
+            width: 200,
+            child: Center(
+              child: Text(
+                "this is card",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => activity2()),
-              );
-            },
-            child: Text("go to activity2"),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class activity1 extends StatelessWidget {
-  const activity1({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Acitivity1")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => activity2()),
-              );
-            },
-            child: Text("go to activity2"),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class activity2 extends StatelessWidget {
-  const activity2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Acitivity2")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => activity1()),
-              );
-            },
-            child: Text("go to activity1"),
-          ),
-        ],
+        ),
       ),
     );
   }
