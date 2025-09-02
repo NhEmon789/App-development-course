@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'fragments/HomeFragment.dart';
+import 'fragments/SearchFragment.dart';
 
 main() {
   runApp(const MyApp());
@@ -19,9 +21,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HomeActivity extends StatelessWidget {
   HomeActivity({super.key});
 
+  // ignore: non_constant_identifier_names
   var MyItems = [
     {
       "img":
@@ -55,12 +59,14 @@ class HomeActivity extends StatelessWidget {
     },
   ];
 
+  // ignore: non_constant_identifier_names
   MySnackBar(message, context) {
     return ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
+  // ignore: non_constant_identifier_names
   MyAlertDialog(context) {
     return showDialog(
       context: context,
@@ -97,176 +103,26 @@ class HomeActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-      padding: EdgeInsets.all(25),
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-    );
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("AppBar"),
-        centerTitle: true,
-        titleSpacing: 0,
-        toolbarHeight: 60,
-        toolbarOpacity: 1,
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        backgroundColor: const Color.fromARGB(255, 64, 255, 188),
-        elevation: 10.0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              MySnackBar("comment", context);
-            },
-            icon: Icon(Icons.comment),
+    return DefaultTabController(
+      length: 8,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Appbar"),
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: [
+              Tab(icon: Icon(Icons.home), text: 'Home'),
+              Tab(icon: Icon(Icons.search_rounded), text: 'Serach'),
+              Tab(icon: Icon(Icons.email), text: 'Email'),
+              Tab(icon: Icon(Icons.settings), text: 'Settings'),
+              Tab(icon: Icon(Icons.person), text: 'Person'),
+              Tab(icon: Icon(Icons.alarm), text: 'Alarm'),
+              Tab(icon: Icon(Icons.contact_page), text: 'Contact'),
+              Tab(icon: Icon(Icons.balance), text: 'Balance'),
+            ],
           ),
-          IconButton(
-            onPressed: () {
-              MySnackBar("search", context);
-            },
-            icon: Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {
-              MySnackBar("home", context);
-            },
-            icon: Icon(Icons.home),
-          ),
-        ],
-      ),
-
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 1.0,
-          childAspectRatio: 1.2,
         ),
-        itemCount: MyItems.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              MySnackBar(MyItems[index]['title'], context);
-            },
-            child: Container(
-              margin: EdgeInsets.all(10),
-              width: double.infinity,
-              height: 200,
-              child: Image.network(MyItems[index]["img"]!, fit: BoxFit.fill),
-            ),
-          );
-        },
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        elevation: 10,
-        backgroundColor: Colors.tealAccent,
-        foregroundColor: Colors.white,
-        onPressed: () {
-          MySnackBar("button", context);
-        },
-        child: Icon(Icons.home),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
-        backgroundColor: Colors.tealAccent,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "profile"),
-        ],
-        onTap: (int index) {
-          if (index == 0) {
-            MySnackBar("home", context);
-          }
-          if (index == 1) {
-            MySnackBar("search", context);
-          }
-          if (index == 2) {
-            MySnackBar("profile", context);
-          }
-        },
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              padding: EdgeInsets.all(0),
-
-              child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.white),
-                accountName: Text(
-                  "Flutter",
-                  style: TextStyle(color: Colors.black),
-                ),
-                accountEmail: Text(
-                  "flutter@example.com",
-                  style: TextStyle(color: Colors.black),
-                ),
-                currentAccountPicture: Image.network(
-                  "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
-                ),
-                onDetailsPressed: () {},
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.add_a_photo),
-              title: Text("Add to photos"),
-              onTap: () {
-                MySnackBar("button", context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.alarm),
-              title: Text("Alarm"),
-              onTap: () {
-                MySnackBar("button", context);
-              },
-            ),
-          ],
-        ),
-      ),
-      endDrawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              padding: EdgeInsets.all(0),
-
-              child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.white),
-                accountName: Text(
-                  "Flutter",
-                  style: TextStyle(color: Colors.black),
-                ),
-                accountEmail: Text(
-                  "flutter@example.com",
-                  style: TextStyle(color: Colors.black),
-                ),
-                currentAccountPicture: Image.network(
-                  "https://storage.googleapis.com/cms-storage-bucket/icon_flutter.0dbfcc7a59cd1cf16282.png",
-                ),
-                onDetailsPressed: () {},
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.add_a_photo),
-              title: Text("Add to photos"),
-              onTap: () {
-                MySnackBar("button", context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.alarm),
-              title: Text("Alarm"),
-              onTap: () {
-                MySnackBar("button", context);
-              },
-            ),
-          ],
-        ),
+        body: TabBarView(children: [HomeFragment(), SearchFragment()]),
       ),
     );
   }
