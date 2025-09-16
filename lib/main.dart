@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:testproject/page1.dart';
+import 'package:testproject/page2.dart';
+import 'package:testproject/page3.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,35 +12,48 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage(), debugShowCheckedModeBanner: false);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false, // Removes debug banner
+      home: const HomePage(),
+    );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final PageController _controller = PageController(initialPage: 0);
+
+  @override
+  void dispose() {
+    _controller.dispose(); // prevent memory leaks
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.home, color: Colors.white),
-        title: Text("Appbar", style: TextStyle(color: Colors.white)),
+        leading: const Icon(Icons.home, color: Colors.white),
+        title: const Text("Appbar", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.lightBlue,
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.add_a_photo),
+            icon: const Icon(Icons.add_a_photo),
             color: Colors.white,
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(flex: 2, child: Container(color: Colors.deepOrangeAccent)),
-          Expanded(flex: 1, child: Container(color: Colors.blue)),
-          Expanded(flex: 1, child: Container(color: Colors.green)),
-        ],
+      body: PageView(
+        controller: _controller,
+        children: const [page1(), page2(), page3()],
       ),
     );
   }
