@@ -32,30 +32,12 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            Container(
-              height: 200,
-              width: 200,
-              color: Colors.orangeAccent,
-              margin: EdgeInsets.all(10),
-            ),
-            Container(
-              height: 200,
-              width: 200,
-              color: Colors.orangeAccent,
-              margin: EdgeInsets.all(10),
-            ),
-            Container(
-              height: 200,
-              width: 200,
-              color: Colors.orangeAccent,
-              margin: EdgeInsets.all(10),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(flex: 2, child: Container(color: Colors.deepOrangeAccent)),
+          Expanded(flex: 1, child: Container(color: Colors.blue)),
+          Expanded(flex: 1, child: Container(color: Colors.green)),
+        ],
       ),
     );
   }
