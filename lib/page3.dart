@@ -5,6 +5,9 @@ class page3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.limeAccent);
+    return Container(
+      color: Colors.amberAccent,
+      child: Center(child: LinearProgressIndicator(color: Colors.blue)),
+    );
   }
 }
