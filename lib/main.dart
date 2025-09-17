@@ -81,9 +81,8 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => page2("Hello")),
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => page2("hello")),
                 );
               },
               child: Text("Go to page 2"),
