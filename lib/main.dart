@@ -56,13 +56,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: InkWell(
+      body: GestureDetector(
         onTap: () {},
         child: Container(
           height: 50,
           width: 100,
           alignment: Alignment.center,
-          child: Text("Inkwell "),
+          child: Text("gesture detector "),
         ),
       ),
     );
