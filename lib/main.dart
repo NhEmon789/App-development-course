@@ -58,12 +58,28 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Checkbox(
-          value: isChecked,
-          onChanged: (value) => setState(() => isChecked = value!),
-          activeColor: Colors.lightBlue,
-          checkColor: Colors.white,
+      body: Container(
+        child: Column(
+          children: [
+            Radio(
+              value: 1,
+              groupValue: 1,
+              activeColor: Colors.lightBlue,
+              onChanged: (value) {},
+            ),
+            Radio(
+              value: 2,
+              groupValue: 1,
+              activeColor: Colors.lightBlue,
+              onChanged: (value) {},
+            ),
+            Radio(
+              value: 3,
+              groupValue: 1,
+              activeColor: Colors.lightBlue,
+              onChanged: (value) {},
+            ),
+          ],
         ),
       ),
     );
