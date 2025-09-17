@@ -56,9 +56,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text("Screen width=$width", style: headLine(context))],
+      body: InkWell(
+        onTap: () {},
+        child: Container(
+          height: 50,
+          width: 100,
+          alignment: Alignment.center,
+          child: Text("Inkwell "),
+        ),
       ),
     );
   }
