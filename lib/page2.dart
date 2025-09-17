@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 class page2 extends StatelessWidget {
-  const page2({super.key});
-
+  String msg;
+  page2(this.msg);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.greenAccent,
-      child: Center(child: CircularProgressIndicator(color: Colors.blue)),
-    );
+    return Container(color: Colors.greenAccent, child: Text("$msg"));
   }
 }
