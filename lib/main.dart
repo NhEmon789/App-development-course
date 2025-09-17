@@ -28,7 +28,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _rvalue = 0;
+  int _rvalue = 2;
+  double _svalue = 2.0;
   void method(int value) {
     setState(() {
       _rvalue = value;
@@ -59,49 +60,21 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Column(
             children: [
-              RadioListTile(
-                value: 1,
-                groupValue: _rvalue,
+              Slider(
+                value: _svalue,
+                min: 0,
+                max: 10,
                 activeColor: Colors.lightBlue,
-
-                title: Text("iphone"),
-                subtitle: Text("data"),
-                secondary: Icon(Icons.apple),
-                controlAffinity: ListTileControlAffinity.trailing,
-                selected: _rvalue == 1 ? true : false,
-
+                inactiveColor: const Color.fromARGB(255, 103, 151, 173),
+                divisions: 100,
+                label: 'Range',
                 onChanged: (value) {
-                  method(value!);
+                  setState(() {
+                    _svalue = value;
+                  });
                 },
               ),
-              RadioListTile(
-                value: 2,
-                groupValue: _rvalue,
-                activeColor: Colors.lightBlue,
-                title: Text("samsung"),
-                subtitle: Text("data"),
-                secondary: Icon(Icons.phone_sharp),
-                controlAffinity: ListTileControlAffinity.trailing,
-                selected: _rvalue == 2 ? true : false,
-                onChanged: (value) {
-                  method(value!);
-                },
-              ),
-              RadioListTile(
-                value: 3,
-                groupValue: _rvalue,
-                activeColor: Colors.lightBlue,
-
-                title: Text("Nokia"),
-                subtitle: Text("data"),
-                secondary: Icon(Icons.handshake_sharp),
-                controlAffinity: ListTileControlAffinity.trailing,
-                selected: _rvalue == 3 ? true : false,
-
-                onChanged: (value) {
-                  method(value!);
-                },
-              ),
+              Text("Slider Value :$_svalue"),
             ],
           ),
         ),
