@@ -51,9 +51,12 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: PageView(
-        controller: _controller,
-        children: const [page1(), page2(), page3()],
+      body: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.5,
+          heightFactor: 0.7,
+          child: Container(color: Colors.red),
+        ),
       ),
     );
   }
