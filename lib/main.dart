@@ -36,6 +36,8 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  bool isChecked = false; // state variable
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -56,13 +58,12 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: GestureDetector(
-        onTap: () {},
-        child: Container(
-          height: 50,
-          width: 100,
-          alignment: Alignment.center,
-          child: Text("gesture detector "),
+      body: Center(
+        child: Checkbox(
+          value: isChecked,
+          onChanged: (value) => setState(() => isChecked = value!),
+          activeColor: Colors.lightBlue,
+          checkColor: Colors.white,
         ),
       ),
     );
