@@ -37,6 +37,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.home, color: Colors.white),
@@ -51,14 +55,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 600) {
-            return Container(height: 400, width: 400, color: Colors.red);
-          } else {
-            return Container(height: 200, width: 200, color: Colors.lightBlue);
-          }
-        },
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Screen width=$width"),
+          Text("Screen hieght=$height"),
+          Text("Screen oreintation=$orientation"),
+        ],
       ),
     );
   }
