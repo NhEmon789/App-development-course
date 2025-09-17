@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:testproject/page1.dart';
 import 'package:testproject/page2.dart';
@@ -29,7 +31,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _rvalue = 2;
-  double _svalue = 2.0;
+  bool _svalue = false;
   void method(int value) {
     setState(() {
       _rvalue = value;
@@ -52,30 +54,21 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(10),
+      body: Center(
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.lightBlue),
           ),
-          child: Column(
-            children: [
-              Slider(
-                value: _svalue,
-                min: 0,
-                max: 10,
-                activeColor: Colors.lightBlue,
-                inactiveColor: const Color.fromARGB(255, 103, 151, 173),
-                divisions: 100,
-                label: 'Range',
-                onChanged: (value) {
-                  setState(() {
-                    _svalue = value;
-                  });
-                },
-              ),
-              Text("Slider Value :$_svalue"),
-            ],
+          child: Switch(
+            value: _svalue,
+            activeColor: Colors.lightBlue,
+            activeTrackColor: Colors.red,
+            inactiveThumbColor: Colors.black,
+            onChanged: (value) {
+              setState(() {
+                _svalue = value;
+              });
+            },
           ),
         ),
       ),
