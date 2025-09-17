@@ -51,15 +51,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Container(
-        height: 400,
-        width: double.infinity,
-        color: Colors.red,
-        alignment: Alignment.center,
-        child: AspectRatio(
-          aspectRatio: 16 / 8,
-          child: Container(color: Colors.lightBlue),
-        ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth > 600) {
+            return Container(height: 400, width: 400, color: Colors.red);
+          } else {
+            return Container(height: 200, width: 200, color: Colors.lightBlue);
+          }
+        },
       ),
     );
   }
