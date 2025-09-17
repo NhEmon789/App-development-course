@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testproject/page1.dart';
 import 'package:testproject/page2.dart';
 import 'package:testproject/page3.dart';
+import 'package:testproject/style.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,11 +58,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Screen width=$width"),
-          Text("Screen hieght=$height"),
-          Text("Screen oreintation=$orientation"),
-        ],
+        children: [Text("Screen width=$width", style: headLine(context))],
       ),
     );
   }
