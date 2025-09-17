@@ -56,11 +56,16 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Container(
+          margin: EdgeInsets.all(15),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.lightBlue),
           ),
-          child: Switch(
+          child: SwitchListTile(
+            contentPadding: EdgeInsets.all(10),
             value: _svalue,
+            title: Text("Swicth"),
+            subtitle: Text("data"),
+            secondary: Icon(Icons.alarm),
             activeColor: Colors.lightBlue,
             activeTrackColor: Colors.red,
             inactiveThumbColor: Colors.black,
