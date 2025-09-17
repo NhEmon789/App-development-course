@@ -51,11 +51,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: FractionallySizedBox(
-          widthFactor: 0.5,
-          heightFactor: 0.7,
-          child: Container(color: Colors.red),
+      body: Container(
+        height: 400,
+        width: double.infinity,
+        color: Colors.red,
+        alignment: Alignment.center,
+        child: AspectRatio(
+          aspectRatio: 16 / 8,
+          child: Container(color: Colors.lightBlue),
         ),
       ),
     );
