@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +28,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  File? _image;
+  final ImagePicker _picker = ImagePicker();
+  Future<void> CameraImage() async {
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +62,42 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(child: Text("data")),
+      body: Column(
+        children: [
+          Container(
+            height: 400,
+            width: double.infinity,
+            color: Colors.lightBlue,
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  CameraImage();
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                child: Icon(Icons.camera),
+              ),
+              SizedBox(width: 20),
+              FloatingActionButton(
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                child: Icon(Icons.photo),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
