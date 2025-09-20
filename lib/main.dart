@@ -54,42 +54,41 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.lightBlue),
-            ),
-
-            child: SwitchListTile(
-              contentPadding: EdgeInsets.all(10),
-              value: _svalue,
-              title: Text("Swicth"),
-              subtitle: Text("data"),
-              secondary: Icon(Icons.alarm),
-              activeColor: Colors.lightBlue,
-              activeTrackColor: Colors.red,
-              inactiveThumbColor: Colors.black,
-              onChanged: (value) {
-                setState(() {
-                  _svalue = value;
-                });
-              },
-            ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 200,
+            backgroundColor: Colors.red,
+            flexibleSpace: FlexibleSpaceBar(title: Text("SliverAppbar")),
           ),
-          Container(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => page2("hello")),
-                );
-              },
-              child: Text("Go to page 2"),
-            ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              addDetails("One", "This is one"),
+              addDetails("Two", "This is two"),
+              addDetails("Three", "This is three"),
+              addDetails("Four", "This is one"),
+              addDetails("Five", "This is two"),
+              addDetails("Six", "This is three"),
+              addDetails("Seven", "This is one"),
+              addDetails("Eight", "This is two"),
+              addDetails("Nine", "This is three"),
+              addDetails("Ten", "This is one"),
+              addDetails("Twelve", "This is two"),
+              addDetails("Thirteen", "This is three"),
+            ]),
           ),
         ],
       ),
     );
   }
+}
+
+Widget addDetails(String name, String description) {
+  return ListTile(
+    title: Text(name),
+    tileColor: const Color.fromARGB(255, 82, 192, 255),
+    subtitle: Text(description),
+    leading: CircleAvatar(child: Text(name[0])),
+  );
 }
