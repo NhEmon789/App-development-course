@@ -1,85 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MaterialApp(home: BottomNavBar()));
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class BottomNavBar extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, // Removes debug banner
-      home: const HomePage(),
-    );
-  }
+  _BottomNavBarState createState() => _BottomNavBarState();
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class _BottomNavBarState extends State<BottomNavBar> {
+  final pages = [A(), B(), C(), D(), E()];
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.lightBlue, Colors.deepPurple],
-            ),
-          ),
-        ),
-        leading: const Icon(Icons.home, color: Colors.white),
-        title: const Text("Appbar", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add_a_photo),
-            color: Colors.white,
-          ),
+      bottomNavigationBar: CurvedNavigationBar(
+        index: 0,
+        color: Colors.white,
+        backgroundColor: Colors.blue,
+        items: [
+          Icon(Icons.home),
+          Icon(Icons.subject),
+          Icon(Icons.group),
+          Icon(Icons.settings),
         ],
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return SizedBox(
-                  height: 250,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text("One"),
-                        subtitle: Text("this is one"),
-                        trailing: Icon(Icons.alarm),
-                      ),
-                      ListTile(
-                        title: Text("One"),
-                        subtitle: Text("this is one"),
-                        trailing: Icon(Icons.alarm),
-                      ),
-                      ListTile(
-                        title: Text("One"),
-                        subtitle: Text("this is one"),
-                        trailing: Icon(Icons.alarm),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
-          },
-          child: Text("click"),
-        ),
       ),
     );
   }
 }
+
+class E {}
+
+class D {}
+
+class C {}
+
+class B {}
+
+class A {}
