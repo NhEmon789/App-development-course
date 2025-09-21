@@ -22,22 +22,31 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   @override
-  var _value = 10.0;
+  var selected = "choose";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RichText(
-          text: TextSpan(
-            text: "Easy explanation",
-            style: TextStyle(fontSize: 20),
-            children: [
-              TextSpan(
-                text: "Subscribe",
-                style: TextStyle(fontSize: 25, color: Colors.green),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(selected, style: TextStyle(fontSize: 50)),
+            DropdownButton(
+              iconSize: 40,
+              items: [
+                DropdownMenuItem(value: "Easy", child: Text("Easy")),
+                DropdownMenuItem(
+                  value: "Explanation",
+                  child: Text("Explanation"),
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  selected = value!;
+                });
+              },
+            ),
+          ],
         ),
       ),
     );
