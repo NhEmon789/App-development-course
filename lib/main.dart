@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,16 +32,10 @@ class _MyWidgetState extends State<MyWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ExpansionTile(
-              title: Text("data"),
-              subtitle: Text("this is one"),
-              leading: IconButton(
-                icon: Icon(Icons.dashboard),
-                onPressed: () {},
-                tooltip: "dashboard",
-              ),
-              trailing: Icon(Icons.ac_unit),
-              children: [Container(height: 200, color: Colors.purple)],
+            Container(height: 300, width: 300, color: Colors.blue),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(color: Colors.white.withValues(alpha: 0.3)),
             ),
           ],
         ),
