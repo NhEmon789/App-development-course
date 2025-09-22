@@ -23,7 +23,22 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  bool _value = false; // ✅ removed @override
+  DateTime? _selectedDate;
+
+  Future<void> _pickDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(), // today's date
+      firstDate: DateTime(2000), // earliest date allowed
+      lastDate: DateTime(2100), // latest date allowed
+    );
+
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +47,16 @@ class _MyWidgetState extends State<MyWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(height: 300, width: 300, color: Colors.blue),
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(color: Colors.white.withValues(alpha: 0.3)),
+            Text(
+              _selectedDate == null
+                  ? "No date chosen!"
+                  : "Selected Date: ${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => _pickDate(context),
+              child: const Text("Pick a Date"),
             ),
           ],
         ),
