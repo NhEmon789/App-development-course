@@ -30,32 +30,12 @@ class _MyWidgetState extends State<MyWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedCrossFade(
-              firstChild: Container(
-                height: 200,
-                color: const Color.fromARGB(198, 255, 143, 5),
-                child: Center(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      setState(() {
-                        _value = false; // switch to secondChild
-                      });
-                    },
-                    child: const Text("easy"),
-                  ),
-                ),
-              ),
-              secondChild: OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    _value = true; // switch to firstChild
-                  });
-                },
-                child: const Text("Show Container"),
-              ),
-              crossFadeState:
-                  _value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-              duration: const Duration(seconds: 1),
+            ExpansionTile(
+              title: Text("data"),
+              subtitle: Text("this is one"),
+              leading: Icon(Icons.abc),
+              trailing: Icon(Icons.ac_unit),
+              children: [Container(height: 200, color: Colors.purple)],
             ),
           ],
         ),
