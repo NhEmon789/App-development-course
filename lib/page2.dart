@@ -1,8 +1,11 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class page2 extends StatelessWidget {
   String msg;
-  page2(this.msg);
+  page2(this.msg, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
