@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -23,42 +23,13 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  DateTime? _selectedDate;
-
-  Future<void> _pickDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(), // today's date
-      firstDate: DateTime(2000), // earliest date allowed
-      lastDate: DateTime(2100), // latest date allowed
-    );
-
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              _selectedDate == null
-                  ? "No date chosen!"
-                  : "Selected Date: ${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _pickDate(context),
-              child: const Text("Pick a Date"),
-            ),
-          ],
+        child: Transform.translate(
+          offset: Offset(8.0, 20.0),
+          child: Container(height: 200, width: 200, color: Colors.red),
         ),
       ),
     );
