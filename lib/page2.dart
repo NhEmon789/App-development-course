@@ -34,6 +34,7 @@ class page2 extends StatelessWidget {
             height: 400,
             width: double.infinity,
             color: Colors.lightBlue,
+            child: Text(msg),
           ),
           SizedBox(height: 20),
           Row(

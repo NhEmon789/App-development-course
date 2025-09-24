@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 import 'package:testproject/page1.dart';
-import 'package:testproject/page3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyWidget());
+    return MaterialApp(
+      home: MyWidget(), // removed const because MyWidget is not const
+      debugShowCheckedModeBanner: false, // optional: removes debug banner
+    );
   }
 }
 
@@ -23,37 +26,42 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  int _selectedIndex = 0;
-  final _pages = [page1(), page3()];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          NavigationRail(
-            backgroundColor: Color.fromARGB(255, 0, 0, 8),
-            labelType: NavigationRailLabelType.all,
-            destinations: [
-              NavigationRailDestination(
-                icon: Icon(Icons.wifi, color: Colors.white),
-                label: Text("Wifi"),
-                selectedIcon: Icon(Icons.wifi, color: Colors.blue),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.sunny, color: Colors.white),
-                label: Text("Sunny"),
-                selectedIcon: Icon(Icons.sunny, color: Colors.blue),
-              ),
-            ],
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (val) {
-              setState(() {
-                _selectedIndex = val;
-              });
-            },
-          ),
-          Expanded(child: Container(child: _pages[_selectedIndex])),
-        ],
+    return IntroductionScreen(
+      pages: [
+        PageViewModel(
+          title: "First",
+          body: "This is our first description",
+          image: Image.asset("images/ph1.jpg"),
+        ),
+        PageViewModel(
+          title: "Second",
+          body: "This is our second description",
+          image: Image.asset("images/ph1.jpg"),
+        ),
+        PageViewModel(
+          title: "Third",
+          body: "This is our third description",
+          image: Image.asset("images/ph1.jpg"),
+        ),
+      ],
+      onDone: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => page1()), // fixed class name
+        );
+      },
+      done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+      showSkipButton: true,
+      skip: const Text("Skip"),
+      dotsDecorator: const DotsDecorator(
+        size: Size(10.0, 10.0),
+        color: Colors.grey,
+        activeSize: Size(22.0, 10.0),
+        activeShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
       ),
     );
   }
