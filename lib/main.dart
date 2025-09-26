@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
-import 'package:testproject/page1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,42 +25,46 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  int counter = 0;
+  loadcounter() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      counter = pref.getInt("counter") ?? 0;
+    });
+  }
+
+  increment() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      counter++;
+      pref.setInt("counter", counter);
+    });
+  }
+
+  @override
+  void initState() {
+    loadcounter();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return IntroductionScreen(
-      pages: [
-        PageViewModel(
-          title: "First",
-          body: "This is our first description",
-          image: Image.asset("images/ph1.jpg"),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "You have clicked $counter times",
+              style: TextStyle(fontSize: 30),
+            ),
+          ],
         ),
-        PageViewModel(
-          title: "Second",
-          body: "This is our second description",
-          image: Image.asset("images/ph1.jpg"),
-        ),
-        PageViewModel(
-          title: "Third",
-          body: "This is our third description",
-          image: Image.asset("images/ph1.jpg"),
-        ),
-      ],
-      onDone: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => page1()), // fixed class name
-        );
-      },
-      done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
-      showSkipButton: true,
-      skip: const Text("Skip"),
-      dotsDecorator: const DotsDecorator(
-        size: Size(10.0, 10.0),
-        color: Colors.grey,
-        activeSize: Size(22.0, 10.0),
-        activeShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: increment,
+        tooltip: "Increment",
+        child: Icon(Icons.add),
       ),
     );
   }
