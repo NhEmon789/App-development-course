@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testproject/page1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyWidget(), // removed const because MyWidget is not const
-      debugShowCheckedModeBanner: false, // optional: removes debug banner
+      home: const MyWidget(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -25,46 +25,62 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  int counter = 0;
-  loadcounter() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      counter = pref.getInt("counter") ?? 0;
-    });
-  }
-
-  increment() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      counter++;
-      pref.setInt("counter", counter);
-    });
-  }
-
-  @override
-  void initState() {
-    loadcounter();
-    super.initState();
-  }
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "You have clicked $counter times",
-              style: TextStyle(fontSize: 30),
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: "Name"),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter your name";
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: "Age"),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter your age";
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: "Email"),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter your email";
+                  }
+                  return null;
+                },
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  if (_formkey.currentState!.validate()) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                const page1(), // ensure Page2 is defined as a widget
+                      ),
+                    );
+                  }
+                },
+                child: const Text("Submit"),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: increment,
-        tooltip: "Increment",
-        child: Icon(Icons.add),
       ),
     );
   }
