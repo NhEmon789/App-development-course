@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,14 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/first",
-      routes: {
-        "/first": (context) => FirstScreen(),
-        "/second": (context) => SecondScreen(),
-      },
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: FirstScreen());
   }
 }
 
@@ -28,33 +25,33 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        height: double.infinity,
-        width: double.infinity,
-        color: Colors.lightBlueAccent,
-        child: OutlinedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, "/second");
-          },
-          child: Text("Go to second page"),
-        ),
-      ),
-    );
+  StreamSubscription? subscription;
+
+  Future checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      Fluttertoast.showToast(msg: "connected with mobile");
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      Fluttertoast.showToast(msg: "connected with mobile");
+    } else {
+      Fluttertoast.showToast(msg: "Not connected");
+    }
   }
-}
-
-class SecondScreen extends StatefulWidget {
-  const SecondScreen({super.key});
 
   @override
-  State<SecondScreen> createState() => _SecondScreenState();
-}
+  void initState() {
+    subscription = Connectivity().onConnectivityChanged.listen((event) {
+      checkConnection();
+    });
+    super.initState();
+  }
 
-class _SecondScreenState extends State<SecondScreen> {
+  @override
+  void dispose() {
+    subscription!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +61,11 @@ class _SecondScreenState extends State<SecondScreen> {
         width: double.infinity,
         color: Colors.greenAccent,
         child: OutlinedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, "/first");
-          },
-          child: Text("Go to first page"),
+          onPressed: checkConnection,
+          child: Text(
+            "check connection",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
