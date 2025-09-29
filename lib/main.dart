@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,31 +10,64 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MyWidget(),
       debugShowCheckedModeBanner: false,
+      initialRoute: "/first",
+      routes: {
+        "/first": (context) => FirstScreen(),
+        "/second": (context) => SecondScreen(),
+      },
     );
   }
 }
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class FirstScreen extends StatefulWidget {
+  const FirstScreen({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<FirstScreen> createState() => _FirstScreenState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
-  static const url = "https://www.google.com";
+class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: Container(
+        alignment: Alignment.center,
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.lightBlueAccent,
         child: OutlinedButton(
           onPressed: () {
-            launch("tel:244344443");
+            Navigator.pushNamed(context, "/second");
           },
-          child: const Text("Google"),
+          child: Text("Go to second page"),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatefulWidget {
+  const SecondScreen({super.key});
+
+  @override
+  State<SecondScreen> createState() => _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.greenAccent,
+        child: OutlinedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, "/first");
+          },
+          child: Text("Go to first page"),
         ),
       ),
     );
